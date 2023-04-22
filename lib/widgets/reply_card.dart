@@ -69,7 +69,7 @@ class _ReplyCardState extends State<ReplyCard> {
   bool isPhoneNumber() {
     String pattern = r'(^(?:[+0])?[0-9]{10,12}$)';
     RegExp regExp = RegExp(pattern);
-    return regExp.hasMatch(widget.message.value['body']);
+    return regExp.hasMatch(widget.message.value['body'] ?? "");
   }
 
   Future pause() async {

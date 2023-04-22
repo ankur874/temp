@@ -27,17 +27,23 @@ class ProfileHeader extends StatelessWidget {
                   : image),
             ),
           ),
-          Text(
-            email,
-            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
-          ),
+          email.isEmpty
+              ? SizedBox()
+              : Text(
+                  email,
+                  style: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.w600),
+                ),
           const SizedBox(
             height: 5,
           ),
-          Text(
-            name,
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
-          )
+          name.isEmpty
+              ? SizedBox()
+              : Text(
+                  name,
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.w300),
+                )
         ],
       ),
     );
