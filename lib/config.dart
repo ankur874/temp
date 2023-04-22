@@ -2,7 +2,7 @@ class AppConfig {
   static const String appName = "Starz App";
   static const String WABAID = "106780908974612";
   static const String apiKey =
-      "EAAMEyX45PoMBAIHAkJZAxkcN7XIS18npE6xAGSltY5BOCPNo6fo5tFCP5CVHpIlCZBAnH6Akm08WvUBycrXQZAhUgPqnk5RSZAsJwXOdncmDbzOQAgEWEtg5D19pOFpX6ZCJiw4s2aF661X3Bv9bJfLQxVOSAS2RRbMloLLfFKkArZCczSr6H5P8nPN4BnNzRKO9u8WNJzORdLGTYU5rARshMPEz5eX1oZD";
+      "EAAMEyX45PoMBANgay2h4unEV9qfJXbi2SNfPLeyF3qNoYV1DxDCd21BZCDcAJPmrMZBIenr1wvZB5W9D0xM89OFbRBpIWcBApQaBVZAhXixZAjBYrZBA1jL2hP7bImu1u15j9aiAjBbZAQx5SZBJwuZCNKwJBTDVymnJyqHknanK7THf4R1hILUofpmvNvHFuYVUZAkpTh7tQZAqPnlZANWudDpMQG9sWKdSeQQZD";
   static const String phoneNoID = "102139596134442";
   static const String version = "v15.0";
   static const String apiURL = "https://graph.facebook.com/";

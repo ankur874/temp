@@ -116,8 +116,8 @@ class PhoneContactsPage extends GetView<ConctactsController> {
                             middleText: fromChat
                                 ? "Would you like to share the following number : ${currentContact.phones.first.number.removeAllWhitespace}"
                                 : "Would you like to add the following number : ${currentContact.phones.first.number.removeAllWhitespace}",
-                            confirm: ElevatedButton(
-                                onPressed: () async {
+                            confirm: GestureDetector(
+                                onTap: () async {
                                   int to = 0;
                                   if (currentContact
                                       .phones.first.number.removeAllWhitespace
@@ -137,21 +137,42 @@ class PhoneContactsPage extends GetView<ConctactsController> {
                                     await controller.whatsapp.messagesTemplate(
                                         templateName: "hello_world", to: to);
                                   }
+                                  Get.back();
                                   Get.showSnackbar(const GetSnackBar(
-                                    messageText: Text("Message Sent"),
+                                    duration: Duration(seconds: 2),
+                                    messageText: Text(
+                                      "Message Sent",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ));
                                 },
-                                child: const SizedBox(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  color: Colors.deepPurpleAccent[200],
                                   width: double.infinity,
-                                  child: Center(child: Text("Yes")),
+                                  child: Center(
+                                      child: Text(
+                                    "Yes",
+                                    style: TextStyle(color: Colors.white),
+                                  )),
                                 )),
                             cancel: OutlinedButton(
                                 onPressed: () {
                                   Get.back();
                                 },
-                                child: const SizedBox(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  // decoration: BoxDecoration(
+                                  //     border: Border.all(width: 1)),
+
                                   width: double.infinity,
-                                  child: Center(child: Text("No")),
+                                  child: Center(
+                                      child: Text(
+                                    "No",
+                                    style: TextStyle(
+                                      color: Colors.deepPurpleAccent[200],
+                                    ),
+                                  )),
                                 )),
                           );
                         },

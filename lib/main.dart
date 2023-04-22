@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Starz App',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+            colorScheme: ColorScheme.fromSwatch()
+                .copyWith(primary: Colors.deepPurpleAccent[200])),
         //home: const RegisterPage(),
         getPages: [
           GetPage(
