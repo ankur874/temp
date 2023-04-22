@@ -21,7 +21,12 @@ class HomeScreen extends StatelessWidget {
     final prefs = GetStorage();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Starz'),
+        backgroundColor: Colors.deepPurpleAccent.shade200,
+        elevation: 0,
+        title: const Text(
+          'Starz',
+          style: TextStyle(fontFamily: 'Poppins'),
+        ),
         leading: IconButton(
             icon: Icon(Icons.logout),
             onPressed: () async {

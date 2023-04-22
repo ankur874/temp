@@ -14,6 +14,7 @@ class MyProfileScreen extends StatelessWidget {
     ProfileController profileController = Get.put(ProfileController());
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepPurpleAccent.shade200,
         title: Text("Profile"),
         leading: GestureDetector(
           onTap: () {

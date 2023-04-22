@@ -11,7 +11,7 @@ class ColoredButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          color: const Color(0xff1C6758),
+          color: Colors.deepPurpleAccent.shade400,
           borderRadius: BorderRadius.circular(20)),
       child: const Text(
         "Next",

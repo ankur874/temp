@@ -26,6 +26,7 @@ class ContactsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.deepPurpleAccent.shade200,
           onPressed: () {
             Get.toNamed(PhoneContactsPage.id, arguments: {
               "fromChat": false,

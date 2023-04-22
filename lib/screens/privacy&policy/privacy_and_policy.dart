@@ -9,6 +9,7 @@ class PrivacyAndPolicyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepPurpleAccent.shade200,
         title: Text("Privacy & Policy"),
       ),
       body: SingleChildScrollView(

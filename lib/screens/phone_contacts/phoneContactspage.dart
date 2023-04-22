@@ -82,7 +82,9 @@ class PhoneContactsPage extends GetView<ConctactsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("My contacts")),
+      appBar: AppBar(
+          backgroundColor: Colors.deepPurpleAccent.shade200,
+          title: const Text("My contacts")),
       body: Column(
         children: [
           Padding(
