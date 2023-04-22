@@ -36,17 +36,32 @@ class ConctactsController extends GetxController {
   }
 
   void updateFilteredContacts() {
-    filteredContacts.value = contacts.value
+    filteredContacts.value = [];
+    if (isNumeric(searchQuery.text)) {
+      filteredContacts.value = [];
+      for (int i = 0; i < contacts.length; i++) {
+        if (contacts[i].phones.length != 0) {
+          if (contacts[i].phones.first.number.contains(searchQuery.text)) {
+            filteredContacts.add(contacts[i]);
+          }
+        }
+      }
+      return;
+    }
+    filteredContacts.value = contacts
         .where((contact) =>
             contact.name.first
                 .toLowerCase()
                 .contains(searchQuery.text.toLowerCase()) ||
             contact.name.last
                 .toLowerCase()
-                .contains(searchQuery.text.toLowerCase()) ||
-            contact.phones.first.number
-                .toLowerCase()
                 .contains(searchQuery.text.toLowerCase()))
         .toList();
   }
+}
+
+bool isNumeric(String s) {
+  bool isValue = double.tryParse(s) != null;
+  print(isValue);
+  return isValue;
 }
