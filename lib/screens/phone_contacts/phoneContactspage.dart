@@ -82,7 +82,7 @@ class PhoneContactsPage extends GetView<ConctactsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("My conctacts")),
+      appBar: AppBar(title: const Text("My contacts")),
       body: Column(
         children: [
           Padding(
@@ -94,6 +94,7 @@ class PhoneContactsPage extends GetView<ConctactsController> {
                   border: OutlineInputBorder()),
               controller: controller.searchQuery,
               onChanged: (value) {
+                print(value);
                 controller.updateFilteredContacts();
               },
             ),
@@ -101,77 +102,77 @@ class PhoneContactsPage extends GetView<ConctactsController> {
           Expanded(
             child: Obx(
               () => ListView.builder(
-                  itemBuilder: (context, index) {
-                    Contact currentContact = controller.filteredContacts[index];
-                    return Column(
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            await Get.defaultDialog(
-                              radius: 10,
-                              title:
-                                  fromChat ? "Send Contact?" : "Add contact?",
-                              middleText: fromChat
-                                  ? "Would you like to share the following number : ${currentContact.phones.first.number.removeAllWhitespace}"
-                                  : "Would you like to add the following number : ${currentContact.phones.first.number.removeAllWhitespace}",
-                              confirm: ElevatedButton(
-                                  onPressed: () async {
-                                    int to = 0;
-                                    if (currentContact
+                itemCount: controller.filteredContacts.length,
+                itemBuilder: (context, index) {
+                  Contact currentContact = controller.filteredContacts[index];
+                  // print(currentContact);
+                  return Column(
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          await Get.defaultDialog(
+                            radius: 10,
+                            title: fromChat ? "Send Contact?" : "Add contact?",
+                            middleText: fromChat
+                                ? "Would you like to share the following number : ${currentContact.phones.first.number.removeAllWhitespace}"
+                                : "Would you like to add the following number : ${currentContact.phones.first.number.removeAllWhitespace}",
+                            confirm: ElevatedButton(
+                                onPressed: () async {
+                                  int to = 0;
+                                  if (currentContact
+                                      .phones.first.number.removeAllWhitespace
+                                      .startsWith("+")) {
+                                    to = int.parse(currentContact
                                         .phones.first.number.removeAllWhitespace
-                                        .startsWith("+")) {
-                                      to = int.parse(currentContact.phones.first
-                                          .number.removeAllWhitespace
-                                          .substring(1));
-                                    } else {
-                                      to = int.parse(
-                                          "91${currentContact.phones.first.number.removeAllWhitespace}");
-                                    }
+                                        .substring(1));
+                                  } else {
+                                    to = int.parse(
+                                        "91${currentContact.phones.first.number.removeAllWhitespace}");
+                                  }
 
-                                    if (fromChat) {
-                                      sendContact('+$to',
-                                          "${currentContact.name.first} ${currentContact.name.last}");
-                                    } else {
-                                      await controller.whatsapp
-                                          .messagesTemplate(
-                                              templateName: "hello_world",
-                                              to: to);
-                                    }
-                                    Get.showSnackbar(const GetSnackBar(
-                                      messageText: Text("Message Sent"),
-                                    ));
-                                  },
-                                  child: const SizedBox(
-                                    width: double.infinity,
-                                    child: Center(child: Text("Yes")),
-                                  )),
-                              cancel: OutlinedButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  child: const SizedBox(
-                                    width: double.infinity,
-                                    child: Center(child: Text("No")),
-                                  )),
-                            );
-                          },
-                          child: ListTile(
-                            title: Text(
-                                "${currentContact.name.first} ${currentContact.name.last}"),
-                            subtitle: Text(currentContact
-                                .phones.first.number.removeAllWhitespace),
-                          ),
+                                  if (fromChat) {
+                                    sendContact('+$to',
+                                        "${currentContact.name.first} ${currentContact.name.last}");
+                                  } else {
+                                    await controller.whatsapp.messagesTemplate(
+                                        templateName: "hello_world", to: to);
+                                  }
+                                  Get.showSnackbar(const GetSnackBar(
+                                    messageText: Text("Message Sent"),
+                                  ));
+                                },
+                                child: const SizedBox(
+                                  width: double.infinity,
+                                  child: Center(child: Text("Yes")),
+                                )),
+                            cancel: OutlinedButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: const SizedBox(
+                                  width: double.infinity,
+                                  child: Center(child: Text("No")),
+                                )),
+                          );
+                        },
+                        child: ListTile(
+                          title: Text(
+                              "${currentContact.name.first} ${currentContact.name.last}"),
+                          subtitle: currentContact.phones.length == 0
+                              ? Text("No number added")
+                              : Text(currentContact.phones.first.number),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w),
-                          child: const Divider(
-                            thickness: 1,
-                          ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: const Divider(
+                          thickness: 1,
                         ),
-                      ],
-                    );
-                  },
-                  itemCount: controller.filteredContacts.length),
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ],

@@ -3,6 +3,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:starz/screens/auth/login/login_page.dart';
 import 'package:starz/screens/privacy&policy/privacy_and_policy.dart';
+import 'package:starz/screens/profile/my_profile.dart';
 
 import 'components/contacts_page.dart';
 
@@ -25,6 +26,11 @@ class HomeScreen extends StatelessWidget {
               Get.offNamed(LoginPage.id);
             }),
         actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(MyProfileScreen());
+              },
+              icon: const Icon(Icons.person_rounded)),
           IconButton(
             onPressed: () {
               Get.toNamed(PrivacyAndPolicyPage.id);
