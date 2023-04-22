@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:starz/config.dart';
 import 'package:starz/screens/home/home_screen.dart';
 
 class AuthController extends GetxController {
@@ -71,6 +73,10 @@ class AuthController extends GetxController {
       // } else {
       //   Get.offAll(WelcomeBackScreen());
       // }
+      FirebaseFirestore.instance
+          .collection("accounts")
+          .doc(AppConfig.phoneNoID)
+          .set({"phoneNumber": phoneNumber.toString()});
       Get.offAll(HomeScreen());
     } catch (err) {
       Get.rawSnackbar(

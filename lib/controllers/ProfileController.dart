@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class ProfileController extends GetxController {
   RxList<String> websites = <String>[].obs;
   RxString businessType = "".obs;
   RxBool isLoading = false.obs;
+  RxString phoneNumber = "".obs;
   @override
   void onInit() {
     getUserProfile();
@@ -42,7 +44,8 @@ class ProfileController extends GetxController {
       var response = await http.get(Uri.parse(url), headers: _headers);
       ProfileModel profile = ProfileModel.fromJson(jsonDecode(response.body));
       print("-------------");
-      print(profile.toJson());
+      // print(profile.toJson());
+      print(jsonDecode(response.body));
       if (profile.data![0].about != null) about.value = profile.data![0].about!;
       if (profile.data![0].address != null)
         address.value = profile.data![0].address!;
@@ -59,6 +62,18 @@ class ProfileController extends GetxController {
       print("------------");
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> getPhoneNumber(String documentId) async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('accounts')
+        .doc(documentId)
+        .get();
+    if (snapshot.exists) {
+      phoneNumber.value = snapshot['phoneNumber'];
+    } else {
+      print('Document does not exist');
     }
   }
 }
