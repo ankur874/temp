@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
     print(userId.toString());
     return Sizer(
       builder: (context, orientation, devicetype) => GetMaterialApp(
-        initialRoute: userId != null ? HomeScreen.id : AuthenticationScreen.id,
+        initialRoute: AuthenticationScreen.id,
         debugShowCheckedModeBanner: false,
         title: 'Starz App',
         theme: ThemeData(
